@@ -1,0 +1,26 @@
+.navMenu{
+    display: flex;
+    background-color: #FF9100;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+}
+.search{
+    width: 40vh;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.2rem 0.5rem;
+}  
+.links a{
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 20px;
+    color: #FFFBE6;
+    transition: 0.5s;
+} 
+.links a:hover{
+    font-size: 25px;
+    color: blue;
+    transition: 0.5s;
+}
