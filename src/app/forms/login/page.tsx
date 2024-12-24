@@ -3,10 +3,9 @@ import Link from "next/link"
 import { signIn } from "next-auth/react"
 import { FormEvent, useState } from "react"
 
-export default function login(){
+export default function Login(){
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const [error,setError] = useState('')
 
 
     async function  HandleSubmit(ev: FormEvent<HTMLFormElement>) {
@@ -19,9 +18,6 @@ export default function login(){
         })
         if(!result?.error){
             window.location.href = "/"
-        } else {
-            setError("Invalid Credentials.")
-            return
         }
     }
 

@@ -34,7 +34,7 @@ export const options:AuthOptions = {
         signIn:"/forms/login"
     },
     callbacks:{
-      async redirect({url,baseUrl}) {
+      async redirect({baseUrl}) {
           return baseUrl
       },
     }

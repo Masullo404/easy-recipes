@@ -8,7 +8,7 @@ export async function POST(req:Request) {
         console.log(userData)
         
         if (!userData) throw new Error('user is not valid')
-        const newUser = await prisma.user.create({
+        await prisma.user.create({
             data:{
                 name:String(userData.get('name')),
                 email:String(userData.get('email')),

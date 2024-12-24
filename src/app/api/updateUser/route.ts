@@ -51,8 +51,8 @@ export async function POST(req: NextRequest) {
         }
 
         return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/profile`);
-    } catch (err:any) {
+    } catch (err) {
         console.error("Error:", err);
-        return NextResponse.json({ error: err.message }, { status: 400 });
+        return NextResponse.json({error:err}, { status: 400 });
     }
 }

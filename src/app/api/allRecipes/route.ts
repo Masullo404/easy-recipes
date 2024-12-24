@@ -3,7 +3,7 @@ import { NextRequest,NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { options } from "../auth/[...nextauth]/options";
 
-export async function GET(req:NextRequest) {
+export async function GET() {
     try{
     const session = await getServerSession(options)
     const user = await prisma.user.findUnique({

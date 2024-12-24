@@ -1,7 +1,7 @@
 import prisma from "@/database/db";
 import { NextRequest,NextResponse } from "next/server";
 
-export async function GET(req:NextRequest) {
+export async function GET() {
     try{
     const views = await prisma.userView.findMany()
     const countingViews:{recipeId:number,counter:number}[] = []

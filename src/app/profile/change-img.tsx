@@ -3,7 +3,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from 'react';
-import { useSession } from 'next-auth/react'
 import { user } from '@prisma/client';
 
 export function ChangeImg() {
