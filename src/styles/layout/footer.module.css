@@ -1,0 +1,22 @@
+.footer{
+    background-color: #FF9100;
+    color: white;
+    display: flex;
+}
+.navFooter{
+    font-size: 20px;
+}
+@media screen and (max-width:520px){
+    .navFooter{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:1070px) {
+    .footer{
+        flex-wrap: wrap;
+        gap:5rem
+    }
+    .footer>div{
+        flex-grow: 1;
+    }
+}

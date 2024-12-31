@@ -11,6 +11,6 @@ export default function ImageProfile(){
     }
     
     return(
-        <img src={user?.img} alt="user image profile"  className="grow-1 img-fluid" style={{maxHeight:"560px",maxWidth:"560px"}}/>
+        <img src={user?.img} alt="user image profile"  className="img-fluid w-100"/>
     )
 }

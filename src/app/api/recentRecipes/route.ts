@@ -17,8 +17,7 @@ export async function GET() {
         },
         orderBy:{
             createdAt:"desc"
-        },
-        take:3
+        }
     })
     return NextResponse.json(recentRecipes,{status:200})
     } catch(err){

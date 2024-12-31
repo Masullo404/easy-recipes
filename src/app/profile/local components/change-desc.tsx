@@ -2,9 +2,10 @@
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import React, { FormEvent, useState } from 'react';
+import { useEffect } from 'react';
 import { user } from '@prisma/client';
+import styles from "../../../styles/my-profile/style.module.css"
 
 
 export function ChangeDescription() {
@@ -12,7 +13,7 @@ export function ChangeDescription() {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
+      <Button variant="primary"  className='w-50 align-self-center' onClick={() => setModalShow(true)}>
         Change Your Bio
       </Button>
       <ChangeDescriptionBox
@@ -29,12 +30,21 @@ interface ChangeDescriptionBoxProps {
 }
 
 export function ChangeDescriptionBox({ show, onHide }: ChangeDescriptionBoxProps) {
-    const { data: session, status } = useSession()
     const [user,setUser] = useState<user|null>(null)
+    const [bioValue,setBioValue] = useState<string>('')
     if(user === null){
       fetch("/api/getUserBySession").then(result => result.json())
       .then(result => setUser(result))
       .catch(err => console.log(err))
+    }
+    useEffect(()=>{
+      setBioValue(String(user?.bio))
+    },[user])
+    function verifyBio(ev:FormEvent){
+      if(bioValue.length <= 40){
+          ev.preventDefault()
+          alert('Your Bio must have at least 40 characters')
+      }
     }
 
     return (
@@ -55,8 +65,9 @@ export function ChangeDescriptionBox({ show, onHide }: ChangeDescriptionBoxProps
           <h4>Bio:</h4>
           <form action="/api/updateUser" method="post">
             <label htmlFor="bio"></label>
-              <input type="text" placeholder={user?.bio} name='bio' /> <br /><br />
-              <Button type='submit'>Change Bio</Button>
+              <textarea name="bio" id="bio" cols={80} rows={4} value={bioValue} onChange={(ev)=>setBioValue(ev.target.value)}
+              ></textarea><br /><br />
+              <Button type='submit' onClick={verifyBio}>Change Bio</Button>
           </form>
         </Modal.Body>
       </Modal>
@@ -71,6 +82,7 @@ export function Bio(){
     .catch(err => console.log(err))
   }
   return(
-    <p>{user?.bio}</p>
+    <p className={styles.bio}>{user?.bio}</p>
   )
 }
+

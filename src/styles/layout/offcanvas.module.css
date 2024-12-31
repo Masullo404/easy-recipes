@@ -1,0 +1,18 @@
+.offCanvasHead{
+    background-color: orange;
+    color: white;
+}
+.offCanvasBody{
+    display: flex;
+    flex-direction: column;
+    background-color: orange;
+    color: white;
+}
+.searchBar{
+    display: none;
+}
+@media  screen and (max-width:920px) {
+    .searchBar{
+        display: block;
+    }   
+}

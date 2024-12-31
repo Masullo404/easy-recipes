@@ -2,8 +2,7 @@ import prisma from "@/database/db"
 import { getServerSession } from "next-auth"
 import { options } from "../auth/[...nextauth]/options"
 import { NextResponse } from "next/server"
-
-
+import { tags } from "@prisma/client";
 
 export async function POST(req: Request) {
     try {
@@ -28,7 +27,8 @@ export async function POST(req: Request) {
 
         if (!userId) throw new Error('User not found');
 
-        await prisma.recipe.create({
+        
+        const recipe = await prisma.recipe.create({
             data: {
                 name: String(recipeData.get('recipe name')),
                 userId: Number(userId?.id),
@@ -36,7 +36,27 @@ export async function POST(req: Request) {
                 imgUrl: `data:image/png;base64,${fileBase64}`, 
             },
         });
+        
+        const allTags = await prisma.tags.findMany()
+        allTags.forEach(tag => {
+            if(recipeData.get(tag.name) === null){
+                const notSelectedTag = allTags.filter(notSelectedTag => notSelectedTag===tag)[0]
+                if(!notSelectedTag) return
+                allTags.splice(allTags.indexOf(notSelectedTag),1)
+                return
+            }
+        })
 
+        allTags.forEach(async (tag) => {
+            await prisma.recipeTags.create({
+                data:{
+                    linked:true,
+                    RecipeId:recipe.id,
+                    tagId:tag.id
+                }
+            })
+        })
+        
         return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/my_recipes`);
     } catch (err) {
         console.log('See the error: ' + err);

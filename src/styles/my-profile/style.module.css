@@ -1,0 +1,21 @@
+.main{
+    height: 80vh;
+}
+.main>div{
+    width: 50%;
+}
+@media screen and (max-width:690px) {
+    .main{
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }  
+    .main>div{
+        width: 100%;
+    }  
+}
+@media screen and (max-width:900px) {
+    .bio{
+        font-size: 10px;
+    }
+}

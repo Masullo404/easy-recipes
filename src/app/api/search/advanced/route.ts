@@ -1,13 +1,11 @@
 import prisma from "@/database/db";
 import { NextRequest,NextResponse } from "next/server";
-import { recipes } from "@/app/my_recipes/myRecentRecipes";
+import { recipes } from "@/app/my_recipes/local components/myRecentRecipes";
 export async function POST(req:NextRequest) {   
     try{
         const filter = await req.json()
         const {recents} = filter
         const {mostV} = filter
-        console.log(recents)
-        console.log(mostV)
         if(mostV && recents){
             const response = await fetch(process.env.NEXTAUTH_URL+'/api/mostViewedRecipes')
             const mostViews:recipes = await response.json()

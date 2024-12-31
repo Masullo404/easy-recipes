@@ -23,6 +23,8 @@ model user{
 
   recipe recipe[]
   view userView[]
+  like like[]
+  favorite favorites[]
 }
 
 model recipe{
@@ -36,6 +38,9 @@ model recipe{
   user user @relation(fields: [userId],references: [id])
 
   view userView[]
+  like like[]
+  favorite favorites[]
+  tag RecipeTags[]
 }
 
 model userView{
@@ -46,4 +51,40 @@ model userView{
 
   user user @relation(fields: [userId],references: [id])
   recipe recipe @relation(fields: [recipeId],references: [id])
+}
+
+model like{
+  recipeId Int
+  userId Int
+  liked Boolean @default(true)
+  @@id([recipeId,userId])
+
+  user user @relation(fields: [userId],references: [id])
+  recipe recipe @relation(fields: [recipeId],references: [id])
+}
+
+model favorites{
+  recipeId Int
+  userId Int
+  bookmarked Boolean @default(true)
+  @@id([recipeId,userId])
+
+  user user @relation(fields: [userId],references: [id])
+  recipe recipe @relation(fields: [recipeId],references: [id])
+}
+
+model tags{
+  id Int @id @default(autoincrement())
+  name String @unique
+
+  recipe RecipeTags[]
+}
+
+model RecipeTags{
+  tagId Int
+  RecipeId Int
+  @@id([tagId,RecipeId])
+  linked Boolean
+  tag tags @relation(fields: [tagId],references: [id])
+  recipe recipe @relation(fields: [RecipeId],references: [id])
 }

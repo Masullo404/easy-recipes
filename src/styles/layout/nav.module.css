@@ -24,3 +24,30 @@
     color: blue;
     transition: 0.5s;
 }
+.divMenuOffCanvas{
+    display: none;
+}
+.normalNavMenu{
+    display: inline;
+}
+@media screen and (max-width:435px){
+    .mainTitle{
+        font-size: 20px;
+    }
+    .navMenu{
+        padding: 1rem 1rem;
+    }
+}
+@media screen and (max-width:920px){
+    .searchBar{
+        display: none;
+    }
+}
+@media screen and (max-width:1200px){
+    .divMenuOffCanvas{
+        display: inline;
+    }
+    .normalNavMenu{
+        display: none;
+    }
+}

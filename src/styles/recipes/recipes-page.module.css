@@ -1,0 +1,29 @@
+.mostViewed{
+    min-width: 340px;
+    width: 30%;
+    height: auto;
+    flex-grow: 1;
+}
+.mostViewedImg{
+    min-width: 170px;
+}
+.searchSection{
+    padding: 3rem 4rem;
+}
+.recipes{
+    width: 30%;
+    flex-grow: 1;
+    min-width: 150px;
+}
+.filterCard{
+    width: 25%;
+    padding: 0;
+}
+@media screen and (max-width:680px) {
+    .filterCard{
+        width: 130px;
+        padding: none;
+        margin-right: 0.5rem;
+        margin-left: -2rem;
+    }
+}

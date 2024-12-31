@@ -1,8 +1,9 @@
 import Link from "next/link"
+import { Button } from "react-bootstrap"
 
 export default function RegisterForm(){
     return(
-        <main style={{height:"100%"}}>
+        <main className="h-100 ">
             <nav className="p-3">
                 <Link href={"/"} className="h1 text-decoration-none text-light ">Easy Recipes</Link>
             </nav>
@@ -18,7 +19,7 @@ export default function RegisterForm(){
                     <input type="text" className="w-100" name="email"/>
                     <label htmlFor="password" className="w-100">Enter your password</label>
                     <input type="password" className="w-100" name="password"/>
-                    <button className="btn btn-success w-50 mt-5 text-center mb-5">Submit</button>
+                    <Button type="submit" className="w-50 my-5 text-center">Submit</Button>
                     <p>Already have an account?<Link href={"/forms/login"} className="mt-5">Login</Link></p>
                 </form>    
                 

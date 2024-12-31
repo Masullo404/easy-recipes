@@ -1,10 +1,13 @@
 "use client"
 import Carousel from 'react-bootstrap/Carousel';
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 type item = {
   src:string,
   title:string,
-  text:string
+  text:string,
 }
 type items = {
   items:item[]
@@ -15,13 +18,14 @@ const CustomizedCarousel:React.FC<items> = ({items})=>{
 
         {items.map((item)=>(
           <Carousel.Item key={item.title}>
-          <img src={item.src} alt="responsive img" className='img-fluid w-100' style={{height:"40vh",objectFit:"cover",filter:"brightness(0.7)"}}/>
-            <Carousel.Caption>
-              <div className='text-start ' style={{marginBottom:"5rem"}}>
+          <img src={item.src} alt="responsive img" className='img-fluid w-100' style={{height:"90vh",objectFit:"cover",filter:"brightness(0.7)"}}/>
+            <Carousel.Caption  className='h-100 p-0 d-flex flex-column justify-content-center' >
+              <div className='text-start'>
                 <h3>{item.title}</h3>
-                <p>
+                <p className='w-75'>
                   {item.text}
                 </p>
+                <Link href="/recipes"><Button>Find your recipe</Button></Link>
               </div>
             </Carousel.Caption>
           </Carousel.Item>

@@ -1,13 +1,14 @@
 "use client"
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import { useState } from "react";
-import CustomizedCarousel from "@/components/home-page/carousel";
-import { recipes } from "../my_recipes/myRecentRecipes";
+import { Button, Carousel } from "react-bootstrap";
+import { recipe } from "@prisma/client";
 import Link from "next/link";
+import styles from "../../styles/recipes/recipes-page.module.css";
 
 export default function Recipes(){
-    const [recentRecipes,setRecentRecipes] = useState<recipes|null>(null)
-    const [recipes,setRecipes] = useState<recipes|null>(null)
+    const [recentRecipes,setRecentRecipes] = useState<recipe[]|null>(null)
+    const [recipes,setRecipes] = useState<recipe[]|null>(null)
     const [recents,setRecents] = useState<boolean>(false)
     const [mostV,setMostV] = useState<boolean>(false)
     
@@ -50,72 +51,78 @@ export default function Recipes(){
     }
 
     return (
-        <>
-            <CustomizedCarousel  items={
-                [
-                    {
-                        src:"https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                        title:"Easy Recipes 1",text:"One"
-                    },
-                    {
-                        src:"https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=600",
-                        title:"Easy Recipes 2",text:"two"
-                    },
-                    {
-                        src:"https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=600",
-                        title:"Easy Recipes 3",text:"Three"
-                    },
-                    {
-                        src:"https://images.pexels.com/photos/803963/pexels-photo-803963.jpeg?auto=compress&cs=tinysrgb&w=600",
-                        title:"Easy Recipes 4",text:"Four"
-                    }
-                ]}   />
+        <main className="bg-light">
+            <Carousel>
+                <Carousel.Item>
+                    <img src="https://images.pexels.com/photos/5718029/pexels-photo-5718029.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="responsive img" className='img-fluid w-100 ' style={{height:"60vh",objectFit:"cover",filter:"brightness(0.7)"}}/>
+                    <Carousel.Caption  className='h-100 p-0 d-flex flex-column justify-content-center' >
+                    <div className='text-start'>
+                        <p className="h1">Find Your Recipes Here</p>
+                        <p className='w-75'>Easy Recipes</p>
+                    </div>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img src="https://images.pexels.com/photos/5718074/pexels-photo-5718074.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="responsive img" className='img-fluid w-100 ' style={{height:"60vh",objectFit:"cover",filter:"brightness(0.7)"}}/>
+                    <Carousel.Caption  className='h-100 p-0 d-flex flex-column justify-content-center' >
+                    <div className='text-start'>
+                        <p className="h1">Easy and Simple</p>
+                    </div>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
             <section className="pl-5 pr-5">
                     <h1 className="text-center mt-5">See the most viewed Recipes</h1>
                     <div className="d-flex justify-content-center">
                         <hr className="text-center w-75"/>
                     </div>
-                    <div className="d-flex flex-wrap p-5 gap-5">
+                    <div className="d-flex flex-wrap p-5 gap-5 h-100">
                         { recentRecipes && recentRecipes.map((recipe)=>(
-                            <div key={recipe.id} className="d-flex flex-column justify-content-between" style={{width:"30%"}}>
-                                <img src={recipe.imgUrl} alt="image" style={{objectFit:"cover"}} className="img-fluid" />
-                                <p className="text-center">{recipe.name}</p>
-                                <p>{recipe.description}</p>
-                                <Link href={`/recipes/recipe/${recipe.id}`} className="align-self-center">
-                                    <button className="btn btn-success">See More</button>
-                                </Link>
+                            <div key={recipe.id} className={"d-flex justify-content-between rounded bg-white shadow-sm "+styles.mostViewed}>
+                                <img src={recipe.imgUrl} alt="image"  className={"img-fluid w-50 rounded object-fit-cover "+styles.mostViewedImg } />
+                                <div className="d-flex flex-column gap-3 p-3 w-50 justify-content-around">
+                                    <p className="text-center h4">{recipe.name}</p>
+                                    <p>{recipe.description.slice(0,50)}...</p>
+                                    <Link href={`/recipes/recipe/${recipe.id}`} className="align-self-center">
+                                        <Button>See The recipe</Button>
+                                    </Link>
+                                </div>
                             </div>
                         ))}
                     </div>
                     <hr />
-                </section>
-                <div>
-                    <h1 className="text-center mt-5">Search Recipes</h1>
-                </div>
-                <section className="d-flex" style={{padding:"1rem 10rem 1rem 10rem"}}>
-                <div className="w-25 rounded p-3" style={{backgroundColor:"#FBF6E9"}}>
+            </section>
+            <div>
+                <h1 className="text-center mt-5">Search Recipes</h1>
+            </div>
+            <section className={"d-flex "+styles.searchSection}>
+                <div className={"rounded p-3 bg-white shadow me-5 h-75 "+styles.filterCard}>
                     <p>Filter Options</p>
-                    <form className="pb-4" onSubmit={AdvancedSearch}>
+                    <form className="pb-4 " onSubmit={AdvancedSearch}>
                     <p>Tags</p>
                         <input type="checkbox" name="recents" checked={recents} onChange={(ev)=>setRecents(Boolean(ev.target.checked))}/>
                         <label htmlFor="recents">Recents</label> <br />
                         <input type="checkbox" name="most viewed"  checked={mostV} onChange={(ev)=>setMostV(Boolean(ev.target.checked))}/>
                         <label htmlFor="most viewed">Most viewed</label> <br />
                         <hr />
-                        <button type="submit" className="btn btn-success">Filter</button>
+                        <Button type="submit">Filter</Button>
                     </form>
                 </div>
                 <div className="w-75 d-flex flex-wrap justify-content-center gap-5">
-                    {recipes &&  recipes.map(recipe => (
-                            <div style={{width:"40%"}}  key={recipe.id}>
-                                <img src={recipe.imgUrl} alt="recipe image" className="w-100 img-fluid"/>
-                                <p className="h3">{recipe.name}</p>
-                                <Link href={`/recipes/recipe/${recipe.id}`}><button>See more</button></Link>
+                    {recipes &&  recipes.slice(0,9).map(recipe => (
+                            <div className={"d-flex flex-column gap-3 bg-white rounded shadow-sm grow-1 "+styles.recipes} key={recipe.id}>
+                                <img src={recipe.imgUrl} alt="recipe image" className="w-100 img-fluid rounded"/>
+                                <div className="d-flex flex-column gap-3 p-3">
+                                    <p className="h3">{recipe.name}</p>
+                                    <Link href={`/recipes/recipe/${recipe.id}`}><Button>See more</Button></Link>
+                                </div>
                             </div>
                         ))
                     }
                 </div>  
             </section>
-        </>
+        </main>
     )
 }

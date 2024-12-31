@@ -13,7 +13,7 @@ export default function ImageInput(){
     return(
         <>
             <label htmlFor="image" className="h3">Select the Recipe's image</label>
-            <input type="file" name="image" onChange={OnFileSubmit} accept="image/png"/>
+            <input type="file" name="image" onChange={OnFileSubmit} accept="image/jpg"/>
             { img && 
             (
                 <div className="p-5">
