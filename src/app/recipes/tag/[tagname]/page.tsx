@@ -43,7 +43,7 @@ export default function RecipesWithTag(){
             )
             :
             (
-                <h1>No Recipes With the '{tagName}' tag</h1>
+                <h1>No Recipes With the &quot;{tagName}&quot; tag</h1>
             )
             }
         </main>
