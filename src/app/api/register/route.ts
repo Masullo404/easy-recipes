@@ -15,7 +15,7 @@ export async function POST(req:Request) {
                 password:String(userData.get('password'))
             }
         })
-        return NextResponse.redirect(process.env.NEXTAUTH_URL+"/login")
+        return NextResponse.redirect(process.env.NEXTAUTH_URL+"/forms/login")
     }catch(err){
         console.log("See the error: "+err)
     }
