@@ -1,10 +1,9 @@
 import prisma from "@/database/db"
 import { getServerSession } from "next-auth"
 import { options } from "../auth/[...nextauth]/options"
-import { NextResponse } from "next/server"
-import { tags } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server"
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     try {
         const session = await getServerSession(options); 
         const recipeData = await req.formData();

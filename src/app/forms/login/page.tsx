@@ -49,7 +49,7 @@ export default function Login(){
         </div>
         <div className="w-50">
             <Image src="https://cdn.pixabay.com/photo/2016/12/10/21/26/food-1898194_640.jpg" alt="food image"
-            height={500} width={500} style={{height:"100%",width:"100%",objectFit:"cover"}}/>   
+            height={500} width={500} className="w-100 h-100 object-fit-cover"/>   
         </div>
        </div>
     )

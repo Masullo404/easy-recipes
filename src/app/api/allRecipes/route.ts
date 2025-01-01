@@ -1,5 +1,5 @@
 import prisma from "@/database/db";
-import { NextRequest,NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { options } from "../auth/[...nextauth]/options";
 
