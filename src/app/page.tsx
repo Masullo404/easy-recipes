@@ -15,12 +15,6 @@ export default function Home() {
   return (
     <div className="bg-light">
       <section className={styles.section}>
-            <Image  src={"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
-            alt="food image" 
-            fill={true}
-            className={styles.img}
-            />
-            
             <img src={"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"} 
             alt="food image" className={styles.img}/>
             <div className={styles.contentSection}>

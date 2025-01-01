@@ -36,7 +36,7 @@ export default function Search(){
                                             <img src={recipe.imgUrl} alt="recipe image" className="rounded w-100" />
                                             <div className="d-flex flex-column ps-4 pt-5 pb-3">
                                                 <p className="h3">{recipe.name}</p>
-                                                <p>{recipe.description.slice(0,40)+"..."}</p>
+                                                <p>{recipe.description.slice(0,40)}&quot;...&quot;</p>
                                                 <Link href={`/recipes/recipe/${recipe.id}`}><Button>See more</Button></Link>
                                             </div>
                                         </div>

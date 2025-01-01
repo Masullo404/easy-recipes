@@ -44,7 +44,7 @@ export default function Login(){
             </section>
 
             <footer className="text-center bg-white ">
-                <p>Don't have an account? <Link href={"/forms/register"}>Register</Link></p>
+                <p>Don&apos;t have an account? <Link href={"/forms/register"}>Register</Link></p>
             </footer>
         </div>
         <div className="w-50">
