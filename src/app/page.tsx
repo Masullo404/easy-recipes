@@ -84,7 +84,7 @@ export default function Home() {
             className={styles.SecondDivImg}
           />
           <p className="text-center w-80">Users can quickly find simple, step-by-step recipes that are easy to follow, 
-            making it ideal for those who don’t want to spend hours searching for or preparing meals</p>
+            making it ideal for those who don&apos;t want to spend hours searching for or preparing meals</p>
           <Button className={styles.linkBtn}><Link href={"/recipes"} className={styles.link}>See Recipes</Link></Button>
         </div>
 
@@ -130,7 +130,7 @@ export default function Home() {
               <textarea name="comment" id="comment"  className="p-2 rounded w-100 mb-3 border-1" rows={5} cols={40}
               placeholder="Leave your comment here"></textarea>
 
-              <Button type="submit" className={"w-50 m-3"}><span className={styles.submitBtn}>Sbumit</span></Button>
+              <Button type="submit" className={"w-50 m-3"}><span className={styles.submitBtn}>Submit</span></Button>
             </form>
           </div>
         </main>

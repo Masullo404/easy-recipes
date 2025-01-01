@@ -12,7 +12,7 @@ export default function ImageInput(){
     }
     return(
         <>
-            <label htmlFor="image" className="h3">Select the Recipe's image</label>
+            <label htmlFor="image" className="h3">Select the Recipes&apos;image</label>
             <input type="file" name="image" onChange={OnFileSubmit} accept="image/jpg"/>
             { img && 
             (

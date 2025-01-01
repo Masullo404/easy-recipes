@@ -1,5 +1,5 @@
 import prisma from "@/database/db";
-import { NextRequest,NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
     try{
@@ -27,5 +27,6 @@ export async function GET() {
     return NextResponse.json(recipes)
     }catch(err){
         console.log(err)
+        return NextResponse.json({error:err})
     }
 }

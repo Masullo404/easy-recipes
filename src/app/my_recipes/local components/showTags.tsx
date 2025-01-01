@@ -1,6 +1,6 @@
 "use client"
 import { tags } from "@prisma/client"
-import { use, useState } from "react"
+import { useState } from "react"
 
 export default function ShowTags(){
     const [tags,setTags] = useState<tags[]|null>(null)
@@ -17,7 +17,7 @@ export default function ShowTags(){
     return(
         <>
         {(tags)?( tags.map(tag => (
-            <div className="bg-primary rounded m-3 p-2 w-100 text-white" >
+            <div className="bg-primary rounded m-3 p-2 w-100 text-white" key={tag.id} >
                 <input type="checkbox" name={tag.name} id={tag.name}  className="mx-3"/>  
                 <label htmlFor={tag.name}>{tag.name}</label>
                 <br />

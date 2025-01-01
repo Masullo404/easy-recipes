@@ -8,7 +8,7 @@ import { useState } from 'react'
 import MenuOffCanvas from './offcanvas'
 
 export default  function MainNav(){
-    const {data:session,status} = useSession()
+    const {status} = useSession()
     const logOut = () => signOut()
     const [search,setSearch] = useState('')
     return (

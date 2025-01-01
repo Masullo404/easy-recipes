@@ -49,7 +49,7 @@ export  function MyRecentRecipes() {
         ) 
         : 
         (
-          <h1>You don't have files yet.</h1>
+          <h1>You don&apos;t have files yet.</h1>
         )}
       </>
     );

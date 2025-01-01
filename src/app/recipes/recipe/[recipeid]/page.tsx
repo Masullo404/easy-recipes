@@ -17,7 +17,7 @@ export default function SingleRecipe(){
     const recipeId = params.recipeid
     const [recipe,setRecipe] = useState<recipe|null>(null)
     const [creator,setCreator] = useState<user|null>(null)
-    const { data: session, status } = useSession()
+    const { status } = useSession()
 
     if(recipe === null){
         fetch(`/api/recipe/${recipeId}`,{

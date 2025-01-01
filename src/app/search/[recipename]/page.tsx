@@ -49,7 +49,7 @@ export default function Search(){
                     (
                     <>
                         <div className="d-flex flex-column justify-content-center align-items-center" style={{height:'75vh'}}>
-                            <h1 className="h-">No recipes found with:"{words}"</h1>
+                            <h1 className="h-">No recipes found with:&quot;{words}&quot;</h1>
                             <p className="display-1">Please try a valid search</p>
                         </div>
                     </>

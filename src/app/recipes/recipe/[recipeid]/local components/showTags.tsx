@@ -19,7 +19,7 @@ export default function ShowTags(props:{recipeId:number}){
     return(
         <>
             { recipeTags && recipeTags.length > 0 && recipeTags.map(tag =>(
-                <Link href={`/recipes/tag/${tag.name}`} className="me-5"><Button>{tag.name}</Button></Link>
+                <Link href={`/recipes/tag/${tag.name}`} key={tag.id} className="me-5"><Button>{tag.name}</Button></Link>
             ))}
         </>
     )

@@ -27,10 +27,10 @@ export default function RecipesWithTag(){
             (
                <>
                <div className="w-100 text-center py-5">
-                <p className="display-1">See Recipes with '{tagName}' tag</p>
+                <p className="display-1">See Recipes with &apos;{tagName}&apos; tag</p>
                </div>
                {recipesByTag.length > 0 && recipesByTag.map(recipe =>(
-                <div className="w-25 rounded bg-white my-5" style={{minWidth:"300px"}}>
+                <div className="w-25 rounded bg-white my-5" style={{minWidth:"300px"}} key={recipe.id}>
                     <Image src={recipe.imgUrl} alt="recipe image"  width={500} height={500} className="w-100 img-fluid"/>
                     <div className="py-5 ps-3">
                         <p className="h3">{recipe.name}</p>

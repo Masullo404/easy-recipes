@@ -75,7 +75,7 @@ export default function UserPage(){
             </section>
             <section className="d-flex gap-5 p-5 flex-wrap justify-content-center">
                     { otherRecipes && otherRecipes.filter(recipes => recipes.id !== recipe?.id ).map(recipe => (
-                        <div className={"w-25 bg-white rounded shadow-sm "+style.recipes}>
+                        <div className={"w-25 bg-white rounded shadow-sm "+style.recipes} key={recipe.id}>
                              <Image src={recipe.imgUrl} alt="recipe image" height={500} width={500} className="w-100 img-fluid"/> 
                             <div className="p-4 ">
                                 <p className="h3">{recipe.name}</p>
