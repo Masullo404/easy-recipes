@@ -1,6 +1,6 @@
 import prisma from "@/database/db";
 import { NextRequest,NextResponse } from "next/server";
-import { recipes } from "@/app/my_recipes/local components/myRecentRecipes";
+import { recipe } from "@prisma/client";
 export async function POST(req:NextRequest) {   
     try{
         const filter = await req.json()
@@ -8,7 +8,7 @@ export async function POST(req:NextRequest) {
         const {mostV} = filter
         if(mostV && recents){
             const response = await fetch(process.env.NEXTAUTH_URL+'/api/mostViewedRecipes')
-            const mostViews:recipes = await response.json()
+            const mostViews:recipe[] = await response.json()
             const result = mostViews.sort((a,b) => Number(a.createdAt)-Number(b.createdAt))
             return NextResponse.json(result)
         }
