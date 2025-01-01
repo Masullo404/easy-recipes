@@ -22,7 +22,7 @@ export async function POST(req:NextRequest) {
         }
         if(mostV){
             const response = await fetch(process.env.NEXTAUTH_URL+'/api/mostViewedRecipes')
-            const result:recipes = await response.json()
+            const result:recipe[] = await response.json()
             return NextResponse.json(result)
         }
         const allRecipes = await prisma.recipe.findMany()
