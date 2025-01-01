@@ -19,7 +19,7 @@ export default function Home() {
             alt="food image" className={styles.img}/>
             <div className={styles.contentSection}>
                 <h1>Easy Recipes</h1>
-                <p>Here you find every recipe with a few clicks</p>
+                <p>Here you find the right recipe with just a few clicks</p>
                 <Button className="btn" href="/recipes">See Recipes</Button>
             </div>
       </section>
