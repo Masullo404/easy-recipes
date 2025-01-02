@@ -8,6 +8,6 @@ export async function GET() {
         return NextResponse.json(allTags)
     }catch(err){
         console.log(err)
-        return NextResponse.json(null)
+        return NextResponse.json({error:err})
     }
 }

@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { options } from "../auth/[...nextauth]/options";
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
     try{
     const session = await getServerSession(options)
@@ -22,6 +24,6 @@ export async function GET() {
     return NextResponse.json(recentRecipes,{status:200})
     } catch(err){
         console.log(err)
-        NextResponse.json({error:err})
+        return NextResponse.json({error:err})
     }
 }

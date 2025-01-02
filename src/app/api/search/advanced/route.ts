@@ -29,5 +29,6 @@ export async function POST(req:NextRequest) {
         return NextResponse.json(allRecipes)
     }catch(err){
         console.log("Caugth Error: "+err)
+        return NextResponse.json({error:err})
     }
 }   

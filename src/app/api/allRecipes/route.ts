@@ -1,7 +1,9 @@
 import prisma from "@/database/db";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { getServerSession, NextAuthOptions } from "next-auth";
 import { options } from "../auth/[...nextauth]/options";
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
     try{
@@ -22,5 +24,6 @@ export async function GET() {
     return NextResponse.json(recentRecipes,{status:200})
     } catch(err){
         console.log(err)
+        return NextResponse.json({error:err})
     }
 }
