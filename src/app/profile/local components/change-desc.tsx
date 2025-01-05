@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { user } from '@prisma/client';
 import styles from "../../../styles/my-profile/style.module.css"
 
-
 export function ChangeDescription() {
    const [modalShow, setModalShow] = React.useState(false);
 
@@ -34,7 +33,10 @@ export function ChangeDescriptionBox({ show, onHide }: ChangeDescriptionBoxProps
     const [bioValue,setBioValue] = useState<string>('')
     if(user === null){
       fetch("/api/getUserBySession").then(result => result.json())
-      .then(result => setUser(result))
+      .then(result => {
+        if(!result) window.location.href ="/forms/login"
+        setUser(result)
+      })
       .catch(err => console.log(err))
     }
     useEffect(()=>{

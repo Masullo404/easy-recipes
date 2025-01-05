@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react"
 import { FormEvent, useState } from "react"
 import Image from "next/image"
 import { Button } from "react-bootstrap"
+import styles from "../../../styles/forms/login.module.css"
 
 export default function Login(){
     const [email,setEmail] = useState('')
@@ -24,9 +25,9 @@ export default function Login(){
     }
 
     return (
-       <div style={{height:"100vh",width:'100vw'}} className="d-flex">
-        <div className="login  w-50">
-            <nav style={{backgroundColor:"orange"}} className="p-3">
+       <div className={"d-flex "+styles.loginMain}>
+        <div className={"login "+styles.loginFormDiv}>
+            <nav className={"p-3"}>
                 <Link href={"/"} className="text-decoration-none text-light h1">Easy Recipes</Link>
             </nav>
 
@@ -47,7 +48,7 @@ export default function Login(){
                 <p>Don&apos;t have an account? <Link href={"/forms/register"}>Register</Link></p>
             </footer>
         </div>
-        <div className="w-50">
+        <div className={styles.loginImgDiv}>
             <Image src="https://cdn.pixabay.com/photo/2016/12/10/21/26/food-1898194_640.jpg" alt="food image"
             height={500} width={500} className="w-100 h-100 object-fit-cover"/>   
         </div>

@@ -4,6 +4,9 @@
 .main>div{
     width: 50%;
 }
+.profileImg{
+    width: 100%;
+}
 @media screen and (max-width:690px) {
     .main{
         flex-direction: column;
@@ -17,5 +20,11 @@
 @media screen and (max-width:900px) {
     .bio{
         font-size: 10px;
+    }
+}
+@media screen and (min-width:1300px) {
+    .profileImg{
+        width: 500px;
+        height: auto;
     }
 }

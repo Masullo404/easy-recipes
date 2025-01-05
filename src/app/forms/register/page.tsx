@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "react-bootstrap"
+import styles from "../../../styles/forms/register.module.css"
 
 export default function RegisterForm(){
     return(
@@ -9,7 +10,7 @@ export default function RegisterForm(){
             </nav>
             <section className="d-flex w-100 justify-content-center align-items-center" style={{height:"90%"}}>
                 <form action="/api/register" method="post" 
-                className="d-flex flex-column bg-light d-flex flex-column justify-content-center rounded align-items-center p-3"
+                className={"d-flex flex-column bg-light d-flex flex-column justify-content-center rounded align-items-center p-3 "+styles.registerForm}
                     style={{height:"65%",width:"35%"}}
                 >
                     <h1 className="text-center mb-5 pb-5 ">Register</h1>

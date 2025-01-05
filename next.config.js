@@ -15,6 +15,12 @@ module.exports = {
         },
         {
           protocol: 'https',
+          hostname: 'img.freepik.com',
+          port: '',
+          pathname: '/free-psd/**',
+        },
+        {
+          protocol: 'https',
           hostname: 'cdn.pixabay.com',
           port: '',
           pathname: '/photo/**',

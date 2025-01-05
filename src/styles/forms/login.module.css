@@ -1,0 +1,20 @@
+.loginMain{
+    height: 100%;
+    width: 100%;
+}
+.loginFormDiv{
+    width: 50% ;
+    background-color: orange;
+}
+.loginImgDiv{
+    width: 50%;
+}
+@media screen and (max-width:1000px) {
+    .loginFormDiv{
+        width: 100% ;
+    }
+    .loginImgDiv{
+        display: none;
+        width: 0%;
+    }
+}
