@@ -1,7 +1,17 @@
 import GetUser from "./db-user";
-import { AuthOptions, Session, User } from "next-auth"
-import { JWT } from "next-auth/jwt";
+import { AuthOptions, } from "next-auth"
 import  CredentialsProvider  from "next-auth/providers/credentials";
+
+declare module "next-auth"{
+  interface Session{
+    user: {
+      id: number; 
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
 
 export const options:AuthOptions = {
     providers:[
@@ -53,9 +63,9 @@ export const options:AuthOptions = {
         } 
         return token;
       },
-      async session({ session, token }: { session: any; token: any }) {
-        if (token) {
-          session.user.id = token.id;
+      async session({ session, token }) {
+        if (token && session.user){
+          session.user.id = Number(token.id);
           session.user.email = token.email;
         }
         return session;
