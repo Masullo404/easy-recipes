@@ -4,19 +4,26 @@ import { NextResponse } from "next/server"
 
 export async function POST(req:Request) {
     try{
-        const userData= await req.formData() 
-        console.log(userData)
-        
+        const userData = await req.json() 
         if (!userData) throw new Error('user is not valid')
-        await prisma.user.create({
-            data:{
-                name:String(userData.get('name')),
-                email:String(userData.get('email')),
-                password:String(userData.get('password'))
+        const emailAlreadyExists = await prisma.user.findUnique({
+            where:{
+                email:String(userData.email)
             }
         })
-        return NextResponse.redirect(process.env.NEXTAUTH_URL+"/forms/login")
+        if(emailAlreadyExists) {
+            return NextResponse.json({message:'email already exists',status:406})
+        }
+        await prisma.user.create({
+            data:{
+                name:String(userData.name),
+                email:String(userData.email),
+                password:String(userData.password)
+            }
+        })
+        return NextResponse.redirect(process.env.NEXTAUTH_URL+'/forms/login')
     }catch(err){
         console.log("See the error: "+err)
+        return NextResponse.json({message:'Something went wrong',status:500})
     }
 }

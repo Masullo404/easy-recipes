@@ -9,7 +9,8 @@ import styles from "../../../styles/forms/login.module.css"
 export default function Login(){
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-
+    const [error,setError] = useState<boolean>(false)
+    const [message,setMessage] = useState<string>('')
 
     async function  HandleSubmit(ev: FormEvent<HTMLFormElement>) {
         ev.preventDefault()
@@ -21,6 +22,9 @@ export default function Login(){
         })
         if(!result?.error){
             window.location.href = "/profile"
+        }else{
+            setError(true)
+            setMessage('Invalid email or password, please try again.')
         }
     }
 
@@ -42,8 +46,18 @@ export default function Login(){
                     onChange={(ev)=> setPassword(ev.target.value)}/>
                     <Button type="submit">Submit</Button>
                 </form>
+            {(error)?
+            (
+            <div className="alert alert-danger mt-5" role="alert">
+                {message}
+            </div>
+            )
+            :
+            (
+                null
+            )
+            }
             </section>
-
             <footer className="text-center bg-white ">
                 <p>Don&apos;t have an account? <Link href={"/forms/register"}>Register</Link></p>
             </footer>
