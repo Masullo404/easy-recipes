@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## About Easy Recipes
+<p>Easy Recipes is a personal project designed to simplify the process of finding and creating recipes. <br>
+It allows users to explore, organize, and share culinary ideas through an intuitive and tag-based interface.</p>
 
-## Getting Started
+## Used Tools
+<p>For the development of Easy Recipes many technologies were used, however the main ones are:</p>
 
-First, run the development server:
+1. **NextJs, Version: 14.2.20**
+2. **Typescript, Version: 5+**
+3. **Prisma (ORM), Version: 6.0.1**
+4. **Postgres (DATABASE)**
+5. **Next-auth for authentication, Version: 4.24.11**
+6. **Bootstrap, Version:5.3.3**
+7. **React-Bootstrap, Version:2.10.6**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installing the project locally
+First of all, in order to install all the dependencies you must clone the repository by typing the command:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> git clone https://github.com/Masullo404/easy-recipes
 
-## Learn More
+After it access the project folder with the command:
 
-To learn more about Next.js, take a look at the following resources:
+> cd ./easy-recipes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Finally, in the project folder, use the command:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+>npm install
+<hr>
+However, that's not all, to have the project running perfectly in your machine you must declare 
+some local variables in the .env and .env.local.
 
-## Deploy on Vercel
+### Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To ensure the project works correctly, you need to create the following files in the root folder (`easy-recipes`):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### **`.env`**
+In the `.env` file declare the variable `DATABASE_URL` which represents your database URL.
+
+#### **`.env.local`**
+In the `.env.local` file declare the variables:
+1. NEXTAUTH_URL="your_local_host" Replace with your localhost or production URL e.g http://localhost:3000
+2. JWT_SECRET="your_secret_jwt_key" Replace it with your customized JWT secret key. 
+
+And the last step to be taken is to execute the command `npx next-auth`, this one is going to generate <br>
+the AUTH_SECRET, that is a secret key for authentication process.
+
+For the last, if you want to run the application, run the command
+> npm run build
