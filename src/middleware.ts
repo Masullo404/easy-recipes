@@ -20,7 +20,6 @@ export async function middleware(req:NextRequest) {
 export const config = {
     matcher:[
       "/profile",
-      "/my_recipes",
       "/api/addRecipeView",
       "/api/favorite",
       "/api/getUserBySession",

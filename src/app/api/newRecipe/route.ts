@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
         });
 
         if (!userId) throw new Error('User not found');
-
         
         const recipe = await prisma.recipe.create({
             data: {
