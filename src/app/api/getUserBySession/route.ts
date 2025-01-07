@@ -8,7 +8,9 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
     try{
     const session = await getServerSession(options)
-    if(!session) throw new Error('User not authenticated')
+    if(!session) {
+        return NextResponse.json(null,{status:401})
+    }
     
     const user = await prisma.user.findUnique({
         where:{
@@ -16,9 +18,9 @@ export async function GET() {
         }
     })
     if(!user) throw new Error('User not identified')
-    return NextResponse.json(user)
+    return NextResponse.json(user,{status:200})
     }catch(err){
-        console.log(err)
+        console.log("An server error ocurred: "+err)
         return NextResponse.json(null,{status:401})
     }
 }

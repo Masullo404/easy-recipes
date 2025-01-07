@@ -1,9 +1,7 @@
 "use client"
-
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
-import { user } from '@prisma/client';
+import React from 'react';
 
 export function ChangeImg() {
    const [modalShow, setModalShow] = React.useState(false);
@@ -11,7 +9,7 @@ export function ChangeImg() {
   return (
     <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
-        Change Your Bio
+        Change Your Image
       </Button>
       <ChangeImgBox
         show={modalShow}
@@ -27,14 +25,6 @@ interface ChangeImgBoxProps {
 }
 
 export function ChangeImgBox({ show, onHide }: ChangeImgBoxProps) {
-    const [user,setUser] = useState<null|user>(null)
-    
-    if(user === null){
-        fetch("/api/getUserBySession").then(result => result.json())
-        .then(result => setUser(result))
-        .catch(err => console.log(err))
-    }
-
     return (
     <Modal
       show={show}

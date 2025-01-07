@@ -3,11 +3,8 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import React, { FormEvent, useState } from 'react';
-import { useEffect } from 'react';
-import { user } from '@prisma/client';
-import styles from "../../../styles/my-profile/style.module.css"
 
-export function ChangeDescription() {
+export function ChangeDescription({bio}:{bio:string}) {
    const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -18,6 +15,7 @@ export function ChangeDescription() {
       <ChangeDescriptionBox
         show={modalShow}
         onHide={() => setModalShow(false)}
+        bio={bio}
       />
     </>
   );
@@ -26,22 +24,15 @@ export function ChangeDescription() {
 interface ChangeDescriptionBoxProps {
   show: boolean;
   onHide: () => void;
+  bio: string;
 }
 
-export function ChangeDescriptionBox({ show, onHide }: ChangeDescriptionBoxProps) {
-    const [user,setUser] = useState<user|null>(null)
+export function ChangeDescriptionBox({ show, onHide,bio }: ChangeDescriptionBoxProps) {
     const [bioValue,setBioValue] = useState<string>('')
-    if(user === null){
-      fetch("/api/getUserBySession").then(result => result.json())
-      .then(result => {
-        if(!result) window.location.href ="/forms/login"
-        setUser(result)
-      })
-      .catch(err => console.log(err))
+    if(bioValue.length === 0) {
+      setBioValue(bio)
     }
-    useEffect(()=>{
-      setBioValue(String(user?.bio))
-    },[user])
+  
     function verifyBio(ev:FormEvent){
       if(bioValue.length <= 40){
           ev.preventDefault()
@@ -76,15 +67,3 @@ export function ChangeDescriptionBox({ show, onHide }: ChangeDescriptionBoxProps
    </div>
   );
 }
-export function Bio(){
-  const [user,setUser] = useState<user|null>(null)
-  if(user === null){
-    fetch("/api/getUserBySession").then(result => result.json())
-    .then(result => setUser(result))
-    .catch(err => console.log(err))
-  }
-  return(
-    <p className={styles.bio}>{user?.bio}</p>
-  )
-}
-

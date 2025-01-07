@@ -1,24 +1,24 @@
 "use client"
 import Link from "next/link";
 import { recipe } from "@prisma/client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Image from "next/image";
 import styles from "../../../styles/my-recipes/style.module.css"
 export default  function AllRecipes(){
   const [allRecipes,setAllRecipes] = useState<recipe[]|null>(null)
-      
-      if(!allRecipes){
-        fetch("/api/allRecipes", {
-            method: "GET",
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          })
-          .then((result) => result.json())
-          .then((result) => setAllRecipes(result))
-          .catch((error) => console.log("Error: " + error));
-      }
+    useEffect(()=>{
+      fetch("/api/allRecipes", {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        .then((result) => result.json())
+        .then((result) => setAllRecipes(result))
+        .catch((error) => console.log("Error: " + error));
+    },[])
+
     return(
         <>
         {  allRecipes && allRecipes.length > 3 ?

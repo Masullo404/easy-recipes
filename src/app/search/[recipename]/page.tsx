@@ -15,7 +15,7 @@ export default function Search(){
         fetch("/api/search",{
             method:"POST",
             headers: {
-                'Content-Type': 'application/json', // Especifica que o corpo é JSON
+                'Content-Type': 'application/json',
             },
             body:JSON.stringify({param:words})
         }).then((result) => result.json())

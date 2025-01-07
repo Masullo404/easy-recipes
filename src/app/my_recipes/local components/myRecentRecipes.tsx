@@ -1,10 +1,11 @@
 "use client"
 import Link from "next/link"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import React from "react"
 import { Button } from "react-bootstrap"
 import Image from "next/image"
 import styles from "../../../styles/my-recipes/style.module.css"
+
 
 
 type recipe ={
@@ -18,8 +19,7 @@ type recipe ={
 
 export  function MyRecentRecipes() {
     const [recipes, setRecipes] = useState<recipe[] | null>(null);
-
-    if(!recipes){
+    useEffect(()=>{
       fetch("/api/recentRecipes", {
         method: "GET",
         headers: {
@@ -29,7 +29,8 @@ export  function MyRecentRecipes() {
       .then((result) => result.json())
       .then((result) => setRecipes(result.slice(0,3)))
       .catch((error) => console.log("Error: " + error));
-    }
+
+    },[])
   
     return (
       <>
