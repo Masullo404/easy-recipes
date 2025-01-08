@@ -3,7 +3,17 @@ import { getToken } from "next-auth/jwt"
 
 export async function middleware(req:NextRequest) {
     try{
-      const token = await getToken({req,secret:process.env.JWT_SECRET})
+        if(req.nextUrl.pathname === "/profile" ||req.nextUrl.pathname === "/my_recipes"){
+        setTimeout(async ()=>{
+          const url = process.env.NEXTAUTH_URL
+          const sessionResponse = await fetch(url+"/api/session")
+          const session = await sessionResponse.json()
+          if(session){
+            return NextResponse.next()
+          }
+          return NextResponse.redirect(new URL('/forms/login',req.url))
+        },500)
+      }
       if(!token){
         console.log('middleware redirecting')
         return NextResponse.redirect(new URL('/forms/login',req.url))
@@ -19,6 +29,7 @@ export async function middleware(req:NextRequest) {
 
 export const config = {
     matcher:[
+      "/my_recipes",
       "/profile",
       "/api/addRecipeView",
       "/api/favorite",
