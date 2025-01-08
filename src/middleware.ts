@@ -14,6 +14,7 @@ export async function middleware(req:NextRequest) {
           return NextResponse.redirect(new URL('/forms/login',req.url))
         },500)
       }
+      const token = await getToken({req,secret:process.env.JWT_SECRET})
       if(!token){
         console.log('middleware redirecting')
         return NextResponse.redirect(new URL('/forms/login',req.url))
