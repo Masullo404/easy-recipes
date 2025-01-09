@@ -9,7 +9,7 @@ export async function middleware(req:NextRequest) {
           const sessionResponse = await fetch(url+"/api/session")
           const session = await sessionResponse.json()
           if(session){
-            return NextResponse.next()
+            return NextResponse.redirect(new URL(req.nextUrl.pathname,req.url))
           }
           return NextResponse.redirect(new URL('/forms/login',req.url))
         },500)

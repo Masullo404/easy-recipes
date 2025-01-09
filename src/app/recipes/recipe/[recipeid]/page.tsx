@@ -18,21 +18,21 @@ export default function SingleRecipe(){
     const [recipe,setRecipe] = useState<recipe|null>(null)
     const [creator,setCreator] = useState<user|null>(null)
     const { status } = useSession()
+    if(!recipe){
+        fetch(`/api/Recipes/recipe/${recipeId}`,{
+            method:"GET",
+            headers: {
+                'Content-Type': 'application/json',
+                }
+        }).then(result => result.json())
+        .then(result => {
+            setRecipe(result.recipe)
+            setCreator(result.user)
+        })
+        .catch((err)=> console.log(err))
+    }
 
     useEffect(()=>{
-        if(recipe === null){
-            fetch(`/api/Recipes/recipe/${recipeId}`,{
-                method:"GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                  }
-            }).then(result => result.json())
-            .then(result => {
-                setRecipe(result.recipe)
-                setCreator(result.user)
-            })
-            .catch((err)=> console.log(err))
-        }
         if(status === "authenticated" && recipe){
             fetch("/api/Views/addRecipeView",{
                 method:"POST",
@@ -42,7 +42,7 @@ export default function SingleRecipe(){
                 body:JSON.stringify({recipeName:recipe.name})
             })
         } 
-    },[status])
+    },[recipe])
 
     return (
         <div className="bg-light p-5">

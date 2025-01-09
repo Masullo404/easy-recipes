@@ -15,7 +15,10 @@ export default function FavoriteBtn(props:props){
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify({recipeId:props.recipeId})
-        }).then(result => result.json()).then(result => setFavorite(result))
+        }).then(result => {
+            if(result.status === 404) setFavorite(null);
+            return result.json();
+        }).then(result => setFavorite(result))
         .catch(err => console.log(err))
     }
     useEffect(()=>{

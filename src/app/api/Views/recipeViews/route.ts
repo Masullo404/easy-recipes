@@ -10,9 +10,10 @@ export async function POST(req:NextRequest) {
             recipeId:recipeId
         }
     })
+    if(!views) return NextResponse.json(null,{status:500})
     return NextResponse.json(Number(views.length))
     }catch(err){
         console.log(err)
-        return NextResponse.json({error:err})
+        return NextResponse.json(null,{status:500})
     }
 }

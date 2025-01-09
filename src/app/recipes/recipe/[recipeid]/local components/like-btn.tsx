@@ -15,12 +15,11 @@ export default function LikeBtn(props:props){
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify({recipeId:props.recipeId})
-        }).then(result => result.json())
-        .then(result => {
-            if(result.status !== 404) setLiked(true)
-            setLiked(Boolean(result))
-
-        }).catch(err => console.log(err)) 
+        }).then(result => {
+            if(result.status === 404) setLiked(null)
+            return result.json()
+        })
+        .then(result => setLiked(result)).catch(err => console.log(err)) 
     }
 
     useEffect(()=>{
@@ -33,7 +32,8 @@ export default function LikeBtn(props:props){
 
     return(
         <>
-            {(liked !== null)?(
+            {
+            (liked !== null)?(
             (liked)?
                 (
                 <Button onClick={Like}><i className="bi bi-hand-thumbs-up-fill"></i> Liked</Button>
