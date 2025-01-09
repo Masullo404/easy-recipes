@@ -56,7 +56,7 @@ export function ChangeDescriptionBox({ show, onHide,bio }: ChangeDescriptionBoxP
         </Modal.Header>
         <Modal.Body>
           <h4>Bio:</h4>
-          <form action="/api/updateUser" method="post">
+          <form action="/api/User/updateUser" method="post">
             <label htmlFor="bio"></label>
               <textarea name="bio" id="bio" cols={80} rows={4} value={bioValue} onChange={(ev)=>setBioValue(ev.target.value)}
               ></textarea><br /><br />

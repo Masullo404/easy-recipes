@@ -40,7 +40,7 @@ model recipe{
   view userView[]
   like like[]
   favorite favorites[]
-  tag RecipeTags[]
+  tag RecipeTags[] 
 }
 
 model userView{
@@ -49,8 +49,8 @@ model userView{
   view Int @default(1)
   @@id([recipeId,userId])
 
-  user user @relation(fields: [userId],references: [id])
-  recipe recipe @relation(fields: [recipeId],references: [id])
+  user user @relation(fields: [userId],references: [id],onDelete: Cascade)
+  recipe recipe @relation(fields: [recipeId],references: [id], onDelete: Cascade)
 }
 
 model like{
@@ -59,8 +59,8 @@ model like{
   liked Boolean @default(true)
   @@id([recipeId,userId])
 
-  user user @relation(fields: [userId],references: [id])
-  recipe recipe @relation(fields: [recipeId],references: [id])
+  user user @relation(fields: [userId],references: [id],onDelete: Cascade)
+  recipe recipe @relation(fields: [recipeId],references: [id],onDelete: Cascade)
 }
 
 model favorites{
@@ -69,8 +69,8 @@ model favorites{
   bookmarked Boolean @default(true)
   @@id([recipeId,userId])
 
-  user user @relation(fields: [userId],references: [id])
-  recipe recipe @relation(fields: [recipeId],references: [id])
+  user user @relation(fields: [userId],references: [id],onDelete: Cascade)
+  recipe recipe @relation(fields: [recipeId],references: [id],onDelete: Cascade)
 }
 
 model tags{
@@ -85,6 +85,6 @@ model RecipeTags{
   RecipeId Int
   @@id([tagId,RecipeId])
   linked Boolean
-  tag tags @relation(fields: [tagId],references: [id])
-  recipe recipe @relation(fields: [RecipeId],references: [id])
+  tag tags @relation(fields: [tagId],references: [id], onDelete: Cascade)
+  recipe recipe @relation(fields: [RecipeId],references: [id],onDelete: Cascade)
 }

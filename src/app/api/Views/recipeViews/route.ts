@@ -4,7 +4,7 @@ import prisma from "@/database/db";
 export async function POST(req:NextRequest) {
     try{
     const {recipeId} = await req.json()
-    if(!recipeId) throw new Error('Recipe not found')
+    if(!recipeId) return NextResponse.json(null,{status:401})
     const views = await prisma.userView.findMany({
         where:{
             recipeId:recipeId

@@ -1,7 +1,7 @@
 import prisma from "@/database/db";
 import { NextRequest,NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { options } from "../auth/[...nextauth]/options";
+import { options } from "../../auth/[...nextauth]/options";
 export async function POST(req:NextRequest){
     try{
     const {recipeName} = await req.json()

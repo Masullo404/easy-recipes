@@ -5,22 +5,12 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import Image from "next/image"
 import styles from "../../../styles/my-recipes/style.module.css"
-
-
-
-type recipe ={
-    id:number,
-    name:string,
-    description:string,
-    createdAt:string,
-    userId:number,
-    imgUrl:string
-}
+import { recipe } from "@prisma/client"
 
 export  function MyRecentRecipes() {
     const [recipes, setRecipes] = useState<recipe[] | null>(null);
     useEffect(()=>{
-      fetch("/api/recentRecipes", {
+      fetch("/api/Recipes/recentRecipes", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +24,7 @@ export  function MyRecentRecipes() {
   
     return (
       <>
-        {recipes ? (
+        { recipes && recipes?.length > 0 && recipes ? (
             recipes.map((recipe) => (
               <div className={"d-flex bg-light rounded shadow-sm my-5 "+styles.recentRecipes} key={recipe.name}>
                   <Image src={recipe.imgUrl} alt="recipe image" width={200} height={300} className="object-fit-cover rounded w-50 h-100"/>

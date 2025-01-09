@@ -7,18 +7,20 @@ type props = {
     recipeId:number
 }
 export default function LikeBtn(props:props){
-    const [liked,setLiked] = useState<boolean>(false)
-    
+    const [liked,setLiked] = useState<boolean|null>(false)
     function fetchLike(method:string){
-        fetch("/api/newLike",{
+        fetch("/api/Likes/newLike",{
             method:`${method}`,
             headers: {
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify({recipeId:props.recipeId})
         }).then(result => result.json())
-        .then(result => setLiked(Boolean(result)))
-        .catch(err => console.log(err)) 
+        .then(result => {
+            if(result.status !== 404) setLiked(true)
+            setLiked(Boolean(result))
+
+        }).catch(err => console.log(err)) 
     }
 
     useEffect(()=>{
@@ -31,8 +33,8 @@ export default function LikeBtn(props:props){
 
     return(
         <>
-            {
-                (liked)?
+            {(liked !== null)?(
+            (liked)?
                 (
                 <Button onClick={Like}><i className="bi bi-hand-thumbs-up-fill"></i> Liked</Button>
                 )
@@ -40,6 +42,7 @@ export default function LikeBtn(props:props){
                 (
                 <Button onClick={Like}><i className="bi bi-hand-thumbs-up"></i> Give it a like</Button>
                 )
+            ):(null)
             }
         </>
     )

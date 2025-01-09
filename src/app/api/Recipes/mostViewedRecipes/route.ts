@@ -4,11 +4,13 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try{
     const views = await prisma.userView.findMany()
+    if(!views) return NextResponse.json(null,{status:500})
     const countingViews:{recipeId:number,counter:number}[] = []
 
     views.forEach(view => {
         if(countingViews.filter(item => item.recipeId === view.recipeId)[0]){
             countingViews.filter(item => item.recipeId === view.recipeId)[0].counter += 1
+            return
         }
         countingViews.push({recipeId:view.recipeId,counter:1})
         return
@@ -24,9 +26,9 @@ export async function GET() {
         }))
     }
 
-    return NextResponse.json(recipes)
+    return NextResponse.json(recipes,{status:200})
     }catch(err){
         console.log(err)
-        return NextResponse.json({error:err})
+        return NextResponse.json(null,{status:500})
     }
 }

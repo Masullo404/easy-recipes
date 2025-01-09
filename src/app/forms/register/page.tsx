@@ -16,7 +16,7 @@ export default function RegisterForm(){
             setError(true)
             SetMessage('You must fill all the fields correctly !')
         }else{
-            const response = await fetch('/api/register',{
+            const response = await fetch('/api/User/register',{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ export default function UserPage(){
     const [recipe,setRecipe] = useState<recipe|null>(null)
     const [otherRecipes,setOther] = useState<recipe[]|null>(null)
     if(!user){
-        fetch("/api/userById",{
+        fetch("/api/User/userById",{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export default function UserPage(){
         }).catch(err => console.log(err))
     }
     if(!otherRecipes) {
-        fetch("/api/userById/userRecipes",{
+        fetch("/api/User/userById/userRecipes",{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export default function UserPage(){
                         :
                         (
                         <div className="d-flex  w-100">
-                            <img src={recipe.imgUrl} alt="recipe image" className="w-50 img-fluid" />
+                            <Image src={recipe.imgUrl} width={500} height={500} alt="recipe image" className="w-50 img-fluid"  />
                             <div className="w-50 d-flex flex-column align-items-center justify-content-center">
                                 <p>Most Liked Recipe:{recipe.name}</p>
                                 <Link href={`/recipes/recipe/${recipe.id}`}><Button>See more</Button></Link>

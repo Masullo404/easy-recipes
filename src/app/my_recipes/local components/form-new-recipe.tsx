@@ -14,7 +14,7 @@ export default function NewRecipeForm(){
         }
     }
     return(
-       <form action={"/api/newRecipe"} method="post"
+       <form action={"/api/Recipes/newRecipe"} method="post"
         className="ml-5 mr-5 d-flex flex-column align-items-center gap-5" encType="multipart/form-data">
             <div className={"d-flex justify-content-between gap-5 w-75 "+styles.formDiv} >
                 <div className="d-flex flex-column">
@@ -23,7 +23,7 @@ export default function NewRecipeForm(){
 
                     <label htmlFor="descripion" className="h3 mt-5 mb-3">Describe how to prepare it</label>
                     <textarea name="description" id="description" placeholder="You're going to need..."
-                    className="recipe-description-input" value={description} onChange={(ev)=>setDescription(ev.target.value)}></textarea>
+                    className="recipe-description-input" rows={15} value={description} onChange={(ev)=>setDescription(ev.target.value)}></textarea>
                 </div>
 
                 <div className={"d-flex flex-column "}>

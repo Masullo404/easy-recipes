@@ -7,17 +7,15 @@ type props={
 }
 
 export default function FavoriteBtn(props:props){
-    const [favorite,setFavorite] = useState<boolean>(false)
-    
+    const [favorite,setFavorite] = useState<boolean|null>(false)
     function fetchFavorite(method:string){
-        fetch('/api/favorite',{
+        fetch('/api/Likes/favorite',{
             method:method,
             headers: {
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify({recipeId:props.recipeId})
-        }).then(result => result.json())   
-        .then(result => setFavorite(result))
+        }).then(result => result.json()).then(result => setFavorite(result))
         .catch(err => console.log(err))
     }
     useEffect(()=>{
@@ -29,8 +27,8 @@ export default function FavoriteBtn(props:props){
     }
     return(
         <>
-            {
-                (favorite)?
+            {(favorite !== null)?(
+            (favorite)?
                 (
                     <Button onClick={Favorite}><i className="bi bi-heart-fill"></i> Favorite</Button>
                 )
@@ -38,6 +36,7 @@ export default function FavoriteBtn(props:props){
                 (
                     <Button onClick={Favorite}><i className="bi bi-heart"></i> Bookmark</Button>
                 )
+            ):(null)
             }
         </>
     )

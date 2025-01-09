@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { options } from "../auth/[...nextauth]/options";
+import { options } from "../../auth/[...nextauth]/options";
 import prisma from "@/database/db";
 
 export async function POST(req: NextRequest) {

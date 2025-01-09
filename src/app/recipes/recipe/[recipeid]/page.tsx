@@ -1,6 +1,6 @@
 "use client"
 import { useParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { recipe, user } from "@prisma/client"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
@@ -19,29 +19,30 @@ export default function SingleRecipe(){
     const [creator,setCreator] = useState<user|null>(null)
     const { status } = useSession()
 
-    if(recipe === null){
-        fetch(`/api/recipe/${recipeId}`,{
-            method:"GET",
-            headers: {
-                'Content-Type': 'application/json',
-              }
-        }).then(result => result.json())
-        .then(result => {
-            setRecipe(result.recipe)
-            setCreator(result.user)
-        })
-        .catch((err)=> console.log(err))
-    }
-
-    if(status === "authenticated" && recipe){
-        fetch("/api/addRecipeView",{
-            method:"POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({recipeName:recipe.name})
-        })
-    } 
+    useEffect(()=>{
+        if(recipe === null){
+            fetch(`/api/Recipes/recipe/${recipeId}`,{
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                  }
+            }).then(result => result.json())
+            .then(result => {
+                setRecipe(result.recipe)
+                setCreator(result.user)
+            })
+            .catch((err)=> console.log(err))
+        }
+        if(status === "authenticated" && recipe){
+            fetch("/api/Views/addRecipeView",{
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify({recipeName:recipe.name})
+            })
+        } 
+    },[status])
 
     return (
         <div className="bg-light p-5">
@@ -53,20 +54,19 @@ export default function SingleRecipe(){
             </div>
             <div className={"grow-1 "}>
                 <h1>{recipe?.name}</h1>
-                <RecipeViews recipeId={Number(recipe?.id)}/>
-                <p>{recipe?.description}</p>
-                <p>Publish date: {String(recipe?.createdAt).split('T')[0]}</p>
-                <div className="d-flex mt-5 w-100 gap-5">
-                    {
-                        recipe && <LikeBtn recipeId={Number(recipe.id)}/>                   
-                    }
-                    {
-                        recipe && <FavoriteBtn recipeId={Number(recipe.id)}/>
-                    }
                     
+                    <RecipeViews recipeId={Number(recipeId)}/>
+
+                <p>{recipe?.description}</p>
+                <p>Publish date: {String(recipe?.createdAt).split('T')[0].split('-').sort().reduce((a,b)=>a+'/'+b)}</p>
+                <div className="d-flex mt-5 w-100 gap-5">
+
+                     <LikeBtn recipeId={Number(recipeId)}/>                   
+                     <FavoriteBtn recipeId={Number(recipeId)}/>
+
                 </div>
                 <div className="mt-3">
-                  {recipe && <ShowTags recipeId={recipe.id}/>  }
+                  <ShowTags recipeId={Number(recipeId)}/>
                 </div>
                 <div className="mt-5">
                     <p>Created by:</p>
@@ -83,7 +83,7 @@ export default function SingleRecipe(){
                 <p className="h1 text-start ps-5">Related Recipes</p>
             </div>
             <section className="d-flex gap-5 px-5 py-3 flex-wrap justify-content-center">
-                <OtherRecipes recipeId={Number(recipe?.id)}/>
+                <OtherRecipes recipeId={Number(recipeId)}/>
             </section>
         </section>
         

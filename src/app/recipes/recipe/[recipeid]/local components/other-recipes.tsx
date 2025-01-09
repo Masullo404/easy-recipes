@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { recipe } from "@prisma/client"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,9 +11,8 @@ type props = {
 }
 export default function OtherRecipes(props:props){
     const [otherRecipes,setOther] = useState<recipe[]|null>(null)
-    
-    if(otherRecipes === null){
-        fetch("/api/search/advanced",{
+    useEffect(()=>{
+        fetch("/api/Recipes/search/advanced",{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +21,7 @@ export default function OtherRecipes(props:props){
         }).then(result => result.json())
         .then(result => setOther(result))
         .catch(err => console.log(err)) 
-    }
+    },[])
     return(
         <>
            { otherRecipes && otherRecipes.filter(recipes => recipes.id !== props.recipeId).slice(0,4).map(recipe => (

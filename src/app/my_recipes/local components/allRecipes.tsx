@@ -8,7 +8,7 @@ import styles from "../../../styles/my-recipes/style.module.css"
 export default  function AllRecipes(){
   const [allRecipes,setAllRecipes] = useState<recipe[]|null>(null)
     useEffect(()=>{
-      fetch("/api/allRecipes", {
+      fetch("/api/Recipes/allRecipes", {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
@@ -26,8 +26,7 @@ export default  function AllRecipes(){
             <>
               <h1 className="text-center mt-4">See all your recipes</h1>
               <section className="d-flex justify-content-center flex-wrap gap-5 p-5">
-                { 
-                allRecipes.map(recipe =>(
+                { allRecipes.map(recipe =>(
                     <div className={"d-flex flex-column bg-white grow-1 h-50 rounded shadow-sm "+styles.allRecipes} key={recipe.name}>
                         <Image src={recipe.imgUrl} alt="recipe image" height={500} width={500} 
                         className={"rounded w-100 object-fit-cover "+styles.recipesImages}/>

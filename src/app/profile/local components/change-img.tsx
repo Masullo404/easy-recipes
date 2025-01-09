@@ -40,7 +40,7 @@ export function ChangeImgBox({ show, onHide }: ChangeImgBoxProps) {
       </Modal.Header>
       <Modal.Body>
         <h4>Select The folder</h4>
-        <form action="/api/updateUser" method='post' encType="multipart/form-data">
+        <form action="/api/User/updateUser" method='post' encType="multipart/form-data">
             <label htmlFor="img">Select an archive</label>
             <input type="file" name='img' accept="image/png"/>
             <br />

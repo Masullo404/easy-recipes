@@ -9,7 +9,7 @@ import { user } from "@prisma/client"
 export default function Profile(){
     const [user,setUser] = useState<user|null>(null)
     useEffect(()=>{
-        fetch('/api/getUserBySession').then(res => res.json()).then(res => setUser(res)).catch(err => console.log(err))
+        fetch('/api/User/getUserBySession').then(res => res.json()).then(res => setUser(res)).catch(err => console.log(err))
     },[])
     return (
         <main className={"d-flex p-5 gap-4 bg-light "+styles.main} >

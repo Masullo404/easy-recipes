@@ -1,7 +1,7 @@
 import prisma from "@/database/db";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { options } from "../auth/[...nextauth]/options";
+import { options } from "../../auth/[...nextauth]/options";
 
 export const dynamic = 'force-dynamic'
 
@@ -18,7 +18,7 @@ export async function GET() {
             userId:Number(user?.id)
         },
         orderBy:{
-            createdAt:"desc"
+            createdAt:"asc"
         }
     })
     return NextResponse.json(recentRecipes,{status:200})

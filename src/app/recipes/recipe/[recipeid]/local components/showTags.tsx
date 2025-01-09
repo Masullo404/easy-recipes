@@ -1,11 +1,11 @@
 "use client"
 import { tags } from "@prisma/client"
 import Link from "next/link"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { Button } from "react-bootstrap"
 export default function ShowTags(props:{recipeId:number}){
     const [recipeTags,setTags] = useState<tags[]|null>(null)
-    if(!recipeTags){
+    useEffect(()=>{
         fetch(`/api/Tag/showRecipeTags`,{
             method:"POST",
             headers: {
@@ -15,7 +15,7 @@ export default function ShowTags(props:{recipeId:number}){
         }).then(result => result.json())
         .then(result =>setTags(result))
         .catch((err)=> console.log(err))
-    }
+    },[])
     return(
         <>
             { recipeTags && recipeTags.length > 0 && recipeTags.map(tag =>(
