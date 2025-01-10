@@ -42,7 +42,7 @@ In the `.env` file declare the variable `DATABASE_URL` which represents your dat
 In the `.env.local` file declare the variables:
 1. NEXTAUTH_URL="your_local_host" Replace with your localhost or production URL e.g http://localhost:3000
 2. JWT_SECRET="your_secret_jwt_key" Replace it with your customized JWT secret key.
-3. NEXTAUTH_SECRET="your_secret_authentication_key" Replace it with your secret authentication key. You can create it by typing `openssl rand -base64 32` in your terminal.
+3. NEXTAUTH_SECRET="your_secret_authentication_key" Replace it with your secret authentication key. You can create it by typing `openssl rand -base64 32` in your GIT BASH terminal.
 
 For the last, if you want to run the application, run the command
 > npm run build (for production)
