@@ -41,10 +41,10 @@ In the `.env` file declare the variable `DATABASE_URL` which represents your dat
 #### **`.env.local`**
 In the `.env.local` file declare the variables:
 1. NEXTAUTH_URL="your_local_host" Replace with your localhost or production URL e.g http://localhost:3000
-2. JWT_SECRET="your_secret_jwt_key" Replace it with your customized JWT secret key. 
-
-And the last step to be taken is to execute the command `npx next-auth`, this one is going to generate <br>
-the AUTH_SECRET, that is a secret key for authentication process.
+2. JWT_SECRET="your_secret_jwt_key" Replace it with your customized JWT secret key.
+3. NEXTAUTH_SECRET="your_secret_authentication_key" Replace it with your secret authentication key. You can create it by typing `openssl rand -base64 32` in your terminal.
 
 For the last, if you want to run the application, run the command
-> npm run build
+> npm run build (for production)
+>
+> npm run dev (for development)
