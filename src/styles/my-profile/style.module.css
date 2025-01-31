@@ -7,7 +7,12 @@
 .profileImg{
     width: 100%;
 }
-@media screen and (max-width:690px) {
+@media screen and (max-width:1600px) {
+    .bio{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:1050px) {
     .main{
         flex-direction: column;
         height: auto;
@@ -16,10 +21,9 @@
     .main>div{
         width: 100%;
     }  
-}
-@media screen and (max-width:900px) {
-    .bio{
-        font-size: 10px;
+    .profileImg{
+        width: 400px;
+        height: auto;
     }
 }
 @media screen and (min-width:1300px) {

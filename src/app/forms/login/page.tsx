@@ -11,6 +11,7 @@ export default function Login(){
     const [password,setPassword] = useState('')
     const [error,setError] = useState<boolean>(false)
     const [message,setMessage] = useState<string>('')
+    const [show,setShow] = useState<string>('password')
 
     async function  HandleSubmit(ev: FormEvent<HTMLFormElement>) {
         ev.preventDefault()
@@ -42,8 +43,23 @@ export default function Login(){
                     <input type="text" className="p-2 mb-4" name="email" placeholder="JhonDoe@gmail.com" 
                     onChange={(ev) => setEmail(ev.target.value)}/>
                     <label htmlFor="password">Password</label>
-                    <input type="password" className="p-2 mb-3" name="password" placeholder=""
-                    onChange={(ev)=> setPassword(ev.target.value)}/>
+                    <div className="d-flex ">
+                        <input type={show} className="p-2 ps-5 mb-3 w-100" name="password" placeholder=""
+                        onChange={(ev)=> setPassword(ev.target.value)} 
+                        />
+                        { (show === "password")?
+                        (
+                            <button className="position-absolute mt-2 ms-1 bg-white border-0" onClick={()=>setShow('text')} type="button">
+                                <i className="bi bi-eye"></i>
+                            </button>
+                        )
+                        :
+                        (
+                            <button className="position-absolute mt-2 ms-1 bg-white border-0" onClick={()=>setShow('password')} type="button">
+                                <i className="bi bi-eye-slash"></i>
+                            </button>
+                        )}
+                    </div> 
                     <Button type="submit">Submit</Button>
                 </form>
             {(error)?

@@ -16,6 +16,7 @@ export async function GET() {
         return
     })    
     const mostViewedViews = countingViews.sort((a,b)=> a.counter - b.counter).slice(0,3)
+    if(!mostViewedViews) return NextResponse.json(null,{status:500})
     const recipes = []
     
     for(let i=0;i<mostViewedViews.length;i++){

@@ -4,21 +4,21 @@ import { getServerSession } from "next-auth";
 import { options } from "../../auth/[...nextauth]/options";
 export async function POST(req:NextRequest){
     try{
-    const {recipeName} = await req.json()
+    const {recipeId}:{recipeId:number} = await req.json()
     const session = await getServerSession(options)
-    if(!recipeName) throw new Error('Invalid recipe')
+    if(!recipeId) return NextResponse.json(null,{status:400})
     const user = await prisma.user.findUnique({
         where:{
             email:String(session?.user?.email)
         }
     })
-    if(!user) throw new Error("User not allowed")
+    if(!user) return NextResponse.json(null,{status:400})
     const recipe = await prisma.recipe.findUnique({
         where:{
-            name:String(recipeName)
+            id:recipeId
         }
     })
-    if(!recipe) throw new Error('Recipe not found')
+    if(!recipe) return NextResponse.json(null,{status:500})
     const viewAlreadyExists = await prisma.userView.findUnique({
         where:{
             recipeId_userId:{
@@ -36,7 +36,7 @@ export async function POST(req:NextRequest){
         })
         return NextResponse.json(newView)
     }
-    return NextResponse.json({status:200})
+    return NextResponse.json(null,{status:200})
     }catch(err){
         console.log(err)
         return NextResponse.json({status:400})

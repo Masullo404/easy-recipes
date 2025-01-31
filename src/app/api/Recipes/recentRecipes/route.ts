@@ -1,18 +1,19 @@
 import prisma from "@/database/db";
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { options } from "../../auth/[...nextauth]/options";
+import { NextRequest, NextResponse } from "next/server";
+import { Session } from "next-auth";
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function POST(req:NextRequest) {
     try{
-    const session = await getServerSession(options)
+    const {session}:{session:Session} = await req.json()
+    if(!session) return NextResponse.json(null,{status:401})
     const user = await prisma.user.findUnique({
         where:{
             email:String(session?.user?.email)
         }
     })
+    if(!user) return NextResponse.json(null,{status:401})
     const recentRecipes = await prisma.recipe.findMany({
         where:{
             userId:Number(user?.id)
@@ -21,6 +22,7 @@ export async function GET() {
             createdAt:"desc"
         }
     })
+    if(!recentRecipes) return NextResponse.json(null,{status:401})
     return NextResponse.json(recentRecipes,{status:200})
     } catch(err){
         console.log(err)

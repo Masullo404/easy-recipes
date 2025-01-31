@@ -1,13 +1,13 @@
 import prisma from "@/database/db";
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { options } from "../../auth/[...nextauth]/options";
+import { NextRequest, NextResponse } from "next/server";
+import { Session } from "next-auth";
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export  async function POST(req:NextRequest) {
     try{
-    const session = await getServerSession(options)
+    const {session}:{session:Session} = await req.json()
+    if(!session) return NextResponse.json(null,{status:401})
     const user = await prisma.user.findUnique({
         where:{
             email:String(session?.user?.email)

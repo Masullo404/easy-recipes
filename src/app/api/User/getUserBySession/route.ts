@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { getServerSession, Session } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 import { options } from "../../auth/[...nextauth]/options";
 import prisma from "@/database/db";
 
@@ -11,10 +11,9 @@ export async function GET() {
     if(!session) {
         return NextResponse.json(null,{status:401})
     }
-    
     const user = await prisma.user.findUnique({
         where:{
-            email:String(session?.user?.email)
+            email:String(session.user.email)
         }
     })
     if(!user) throw new Error('User not identified')
@@ -22,5 +21,21 @@ export async function GET() {
     }catch(err){
         console.log("An server error ocurred: "+err)
         return NextResponse.json(null,{status:401})
+    }
+}
+export async function POST(req:NextRequest) {
+    try {
+        const {session}:{session:Session} = await req.json()
+        if(!session) return NextResponse.json(null,{status:401})
+        const user = await prisma.user.findUnique({
+            where:{
+                email:String(session.user.email)
+            }
+        })
+        if(!user) return NextResponse.json(null,{status:401})
+        return NextResponse.json(user)
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json(error)
     }
 }

@@ -3,7 +3,7 @@ import prisma from "@/database/db";
 
 export async function POST(req:NextRequest) {
     try{
-    const {recipeId} = await req.json()
+    const {recipeId}:{recipeId:number} = await req.json()
     if(!recipeId) return NextResponse.json(null,{status:401})
     const views = await prisma.userView.findMany({
         where:{

@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt"
 
 export async function middleware(req:NextRequest) {
     try{
-        if(req.nextUrl.pathname === "/profile" ||req.nextUrl.pathname === "/my_recipes"){
+        if(req.nextUrl.pathname === "/profile"){
         setTimeout(async ()=>{
           const url = process.env.NEXTAUTH_URL
           const sessionResponse = await fetch(url+"/api/session")
@@ -30,7 +30,6 @@ export async function middleware(req:NextRequest) {
 
 export const config = {
     matcher:[
-      "/my_recipes",
       "/profile",
       "/api/addRecipeView",
       "/api/favorite",
