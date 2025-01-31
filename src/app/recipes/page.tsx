@@ -2,8 +2,7 @@ import MostViewedRecipes from "@/components/recipes/most-viewed-recipes";
 import SearchRecipes from "@/components/recipes/recipes-search";
 import RecipesPageCarousel from "@/components/recipes/recipes-page-carousel";
 
-export default function Recipes(){
-    
+export default async function Recipes(){
     return (
         <main className="bg-light">
            <RecipesPageCarousel />

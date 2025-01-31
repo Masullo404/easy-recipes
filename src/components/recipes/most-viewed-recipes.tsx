@@ -4,8 +4,17 @@ import Link from "next/link"
 import { Button, Spinner } from "react-bootstrap"
 import styles from "../../styles/recipes/recipes-page.module.css";
 
-export default async function MostViewedRecipes() {
+export default async function MostViewedRecipes(){
     const url = process.env.NEXTAUTH_URL
+    if(!url){
+        return(
+            <div style={{height:"80vh"}} className="d-flex align-items-center justify-content-center">
+                <div className="alert alert-danger">
+                    An error ocurred when loading the most viewed recipes
+                </div>
+            </div>
+        )
+    }
     const recipesResponse = await fetch(url+"/api/Recipes/mostViewedRecipes")
     if(!recipesResponse.ok) {
         return(
