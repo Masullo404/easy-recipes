@@ -1,3 +1,4 @@
+"use server"
 import { recipe } from "@prisma/client"
 import Link from "next/link"
 import { Button, Spinner } from "react-bootstrap"
