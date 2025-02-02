@@ -15,7 +15,13 @@ export default async function MostViewedRecipes(){
             </div>
         )
     }
-    const recipesResponse = await fetch(url+"/api/Recipes/mostViewedRecipes")
+    const recipesResponse = await fetch(url+"/api/Recipes/search/advanced",{
+        method:"POST",
+        headers:{
+            'Content-Type':"Application/json"
+        },
+        body:JSON.stringify({mostV:true})
+    })
     if(!recipesResponse.ok) {
         return(
             <div className="alert alert-danger">

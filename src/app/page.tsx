@@ -98,7 +98,7 @@ export default function Home() {
               title:"A practical and flexible searching",text:"just with a fex clicks you find the kind of meal you want to prepare!"
             }
 
-          ]}  />
+          ]} />
       </section>
 
       <section className="d-flex justify-content-around p-5 bg-light" >

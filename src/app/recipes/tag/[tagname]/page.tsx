@@ -43,7 +43,11 @@ export default function RecipesWithTag(){
             )
             :
             (
-                <h1>No Recipes With the &quot;{tagName}&quot; tag</h1>
+                <main style={{height:"80vh"}} className="d-flex justify-content-center align-items">
+                    <div className="alert alert-secondary">
+                        No Recipes with the &quot;{tagName}&quot; tag
+                    </div>
+                </main>
             )
             }
         </main>

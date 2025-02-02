@@ -8,6 +8,7 @@ export default function SearchRecipes() {
     const [recipes,setRecipes] = useState<recipe[]|null>(null)
     const [recents,setRecents] = useState<boolean>(false)
     const [mostV,setMostV] = useState<boolean>(false)
+    const [tags,setTags] = useState<string[]>([])
 
     useEffect(()=>{
         fetch("/api/Recipes/search/advanced",{
@@ -15,7 +16,7 @@ export default function SearchRecipes() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify({recents:recents,mostV:mostV})
+            body:JSON.stringify({recents:recents,mostV:mostV,tags:tags})
         }).then(result => result.json())
         .then(result => setRecipes(result))
         .catch(err => console.log(err)) 
@@ -28,24 +29,50 @@ export default function SearchRecipes() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body:JSON.stringify({recents,mostV})
+            body:JSON.stringify({recents:recents,mostV:mostV,tags:tags})
         }).then(result => result.json())
         .then(result => setRecipes(result))
         .catch(err => console.log(err))
     }
-
+    function AddTag(tag:string){
+        const newValue = tags
+        newValue.push(tag)
+        setTags(newValue)
+        
+    }
+    function RemoveTag(remove:string){
+        const removeTag = tags.filter(removedTag => removedTag !== remove)
+        setTags(removeTag)
+    }
+    function VerifyChecked(checked:boolean,name:string){
+        if(checked === true){
+            AddTag(name)
+            return
+        }
+        RemoveTag(name)
+    }
     return(
         <>
         <section className={"d-flex "+styles.searchSection}>
             <div className={"rounded p-3 bg-white shadow me-5 h-75 "+styles.filterCard}>
-                <p>Filter Options</p>
+                <p className="h2">Filter Options</p>
+                <hr />
                 <form className="pb-4 " onSubmit={AdvancedSearch}>
-                <p>Tags</p>
-                    <input type="checkbox" name="recents" checked={recents} onChange={(ev)=>setRecents(Boolean(ev.target.checked))}/>
-                    <label htmlFor="recents">Recents</label> <br />
-                    <input type="checkbox" name="most viewed"  checked={mostV} onChange={(ev)=>setMostV(Boolean(ev.target.checked))}/>
-                    <label htmlFor="most viewed">Most viewed</label> <br />
+                        <p className="h4">General Options</p>
+                        <input type="checkbox" name="recents" checked={recents} onChange={(ev)=>setRecents(Boolean(ev.target.checked))}/>
+                        <label htmlFor="recents">Recents</label> <br />
+                        <input type="checkbox" name="most viewed"  checked={mostV} onChange={(ev)=>setMostV(Boolean(ev.target.checked))}/>
+                        <label htmlFor="most viewed">Most viewed</label> <br />
                     <hr />
+                    <p className="h4">Tags</p>
+                        <input type="checkbox" name="easy-to-do" onChange={(ev)=>VerifyChecked(ev.target.checked,"easy-to-do")}/> 
+                        <label htmlFor="">Easy-To-do</label> <br />
+                        <input type="checkbox" name="spicy-food" onChange={(ev)=>VerifyChecked(ev.target.checked,"spicy-food")}/>
+                        <label htmlFor="">Spicy Food</label> <br />
+                        <input type="checkbox" name="french-food" onChange={(ev)=>VerifyChecked(ev.target.checked,"french-food")}/>
+                        <label htmlFor="">French Food</label> <br />
+                        <input type="checkbox" name="sweet" onChange={(ev)=>VerifyChecked(ev.target.checked,"sweet")}/>
+                        <label htmlFor="">Sweet</label> <br /> <br />
                     <Button type="submit">Filter</Button>
                 </form>
             </div>
