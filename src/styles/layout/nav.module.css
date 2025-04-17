@@ -37,6 +37,9 @@
     .navMenu{
         padding: 1rem 1rem;
     }
+    .RecipeLink{
+        font-size: 13px !important;
+    }
 }
 @media screen and (max-width:920px){
     .searchBar{
@@ -45,9 +48,9 @@
 }
 @media screen and (max-width:1200px){
     .divMenuOffCanvas{
-        display: inline;
+        display: inline !important;
     }
     .normalNavMenu{
-        display: none;
+        display: none !important;
     }
 }

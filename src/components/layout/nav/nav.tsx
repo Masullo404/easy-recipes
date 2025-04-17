@@ -27,9 +27,11 @@ export default  function MainNav(){
             </div>
             
             <div className={styles.links}>
-                <Link href={"/recipes"}>Recipes</Link>
+                <Link href={"/recipes"} className={styles.RecipeLink}>Recipes</Link>
                 {(status !== "authenticated")?
-                (<Link href={"/forms/login"}><Button className='btn btn-success pt-3 pb-3 pl-5 pr-5'>Login</Button></Link>)
+                (
+                <Link href={"/forms/login"}><Button className='btn btn-success pt-3 pb-3 pl-5 pr-5'>Login</Button></Link>
+                )
                 :
                 (
                     <>
