@@ -20,7 +20,7 @@ export default async function MostViewedRecipes(){
         headers:{
             'Content-Type':"Application/json"
         },
-        body:JSON.stringify({mostV:true})
+        body:JSON.stringify({mostV:true,recents:false,tags:[]})
     })
     if(!recipesResponse.ok) {
         return(
@@ -29,7 +29,7 @@ export default async function MostViewedRecipes(){
             </div>
         )
     }
-    const recipes:recipe[] = await recipesResponse.json()
+    const recipes:recipe[]  = await recipesResponse.json()
     return(
         <>
         { (recipes)?

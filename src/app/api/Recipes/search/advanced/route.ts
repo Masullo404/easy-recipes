@@ -36,6 +36,6 @@ export async function POST(req:NextRequest) {
         return NextResponse.json(result,{status:200})
     }catch(err){
         console.log(err)
-        return NextResponse.json({error:err})
+        return NextResponse.json(null,{status:500})
     }
 }
